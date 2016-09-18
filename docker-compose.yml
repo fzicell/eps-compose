@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  eps-db:
+#    build: 
+#      context: ./eps-db
+#      dockerfile: Dockerfile
+    container_name: eps-db
+    image: fzicell/eps-db
+    hostname: eps-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlpass
+    volumes:
+      - ./eps-db/shared:/docker-entrypoint-initdb.d
+    working_dir: /opt/shared
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+
+  eps-backend:
+#    build:
+#      context: ./eps-backend
+#      dockerfile: Dockerfile
+    container_name: eps-backend
+    image: fzicell/eps-backend
+    hostname: eps-backend
+    volumes:
+      - ./eps-backend/shared:/opt/shared
+#      - ~/docker/eps/eps-backend/shared:/opt/shared
+    working_dir: /opt/shared
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+      - "8080:8080"
+    expose:
+      - "9000"
+      - "9001"
+      - "8080"
+    links:
+      - eps-db
