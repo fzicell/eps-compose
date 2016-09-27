@@ -18,6 +18,7 @@
 --
 -- Using database `mysql`
 --
+
 USE `mysql`;
 
 --
@@ -32,6 +33,7 @@ CREATE TABLE `customer` (
   `LASTNAME` varchar(100) NOT NULL,
   `USERNAME` varchar(20) NOT NULL,
   `PASSWORD` varchar(20) NOT NULL,
+  `BALANCE` int(10) NOT NULL,
   `AGE` int(10) unsigned NOT NULL,
   PRIMARY KEY (`CUSTOMERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
