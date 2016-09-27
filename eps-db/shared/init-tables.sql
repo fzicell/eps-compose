@@ -21,9 +21,11 @@
 
 USE `mysql`;
 
+
 --
 -- Table structure for table `customer`
 --
+
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -36,20 +38,23 @@ CREATE TABLE `customer` (
   `BALANCE` int(10) NOT NULL,
   `AGE` int(10) unsigned NOT NULL,
   PRIMARY KEY (`CUSTOMERID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `customer`
 --
+
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'Teszt','Elek','icell','icell',37000,20);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Table structure for table `vehicle`
 --
+
 DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -62,15 +67,44 @@ CREATE TABLE `vehicle` (
   KEY `CUSTOMERID` (`CUSTOMERID`),
   KEY `PLATENUMBER` (`PLATENUMBER`),
   CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`CUSTOMERID`) REFERENCES `customer` (`CUSTOMERID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `vehicle`
 --
+
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `parkingorder`
+--
+
+DROP TABLE IF EXISTS `parkingorder`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parkingorder` (
+  `PARKINGID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `CUSTOMERID` int(10) unsigned NOT NULL,
+  `VEHICLEID` int(10) NOT NULL,
+  `UPDATEDAT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `STARTEDAT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `FINISHEDAT` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`PARKINGID`),
+  KEY `CUSTOMERID` (`CUSTOMERID`,`VEHICLEID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parkingorder`
+--
+
+LOCK TABLES `parkingorder` WRITE;
+/*!40000 ALTER TABLE `parkingorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `parkingorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -82,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-26 12:30:31
+-- Dump completed on 2016-09-28  0:49:21
